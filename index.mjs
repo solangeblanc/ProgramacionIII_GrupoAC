@@ -96,7 +96,7 @@ async function procesarArchivoLocal() {
 
         const reducido = personajes.map(p => ({ id: p.id, nombre: p.fullName }));
         await fs.writeFile('personajes_reducidos.json', JSON.stringify(reducido, null, 2));
-        console.log("--- Punto 2.d) Archivo 'personajes_reducidos.json' creado ---");
+        console.log(" Archivo 'personajes_reducidos.json' creado");
 
 //e) Para los datos anteriores ordenar por nombre y de forma decreciente, luego mostrar por
 //consola (investigar método sort()).
