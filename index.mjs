@@ -86,7 +86,7 @@ async function procesarArchivoLocal() {
 //c) Eliminar el primer personaje, mostrar en consola el elemento eliminado.
 
         const eliminado = personajes.shift();
-        console.log("--- Punto 2.c) Elemento eliminado: ", eliminado);
+        console.log("Elemento eliminado: ", eliminado);
 
 // Guardamos los cambios en el archivo original
 
@@ -102,11 +102,11 @@ async function procesarArchivoLocal() {
 //consola (investigar método sort()).
 
         reducido.sort((a, b) => b.nombre.localeCompare(a.nombre));
-        console.log("Punto 2.e) Lista reducida ordenada (Z-A)");
+        console.log("Lista reducida ordenada (Z-A)");
         console.log(reducido);
 
     } catch (error) {
-        console.error("Error en el punto 2:", error.message);
+        console.error("Error:", error.message);
     }
 }
 
