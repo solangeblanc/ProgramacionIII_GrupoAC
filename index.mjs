@@ -42,7 +42,7 @@ async function buscarPorId(id) {
     try {
         const respuesta = await fetch(`${url}/${id}`);
         const personaje = await respuesta.json();
-        console.log(`--- Punto 1.c) Personaje encontrado (ID: ${id}) ---`);
+        console.log(`Personaje encontrado (ID: ${id})`);
         console.log(personaje);
     } catch (error) {
         console.error("Error en punto c:", error.message);
@@ -54,9 +54,9 @@ async function buscarPorId(id) {
 async function guardarEnArchivo(datos) {
     try {
         await fs.writeFile('personajes.json', JSON.stringify(datos, null, 2));
-        console.log("Punto 1.d: Datos guardados en 'personajes.json'");
+        console.log("Datos guardados en 'personajes.json'");
     } catch (error) {
-        console.error("Error en punto d:", error.message);
+        console.error("Error:", error.message);
     }
 }
 
@@ -74,7 +74,7 @@ async function procesarArchivoLocal() {
 
 // a) Agregar un personaje al final del archivo.
 
-        personajes.push({ id: 99, fullName: "Personaje Final", family: "Cátedra UNER" });
+        personajes.push({ id: 99, fullName: "Personaje Final", family: "Grupo AC" });
         
 //b) Agregar dos personajes al inicio del archivo.
 
@@ -86,7 +86,7 @@ async function procesarArchivoLocal() {
 //c) Eliminar el primer personaje, mostrar en consola el elemento eliminado.
 
         const eliminado = personajes.shift();
-        console.log("--- Punto 2.c) Elemento eliminado: ---", eliminado);
+        console.log("--- Punto 2.c) Elemento eliminado: ", eliminado);
 
 // Guardamos los cambios en el archivo original
 
@@ -102,7 +102,7 @@ async function procesarArchivoLocal() {
 //consola (investigar método sort()).
 
         reducido.sort((a, b) => b.nombre.localeCompare(a.nombre));
-        console.log("--- Punto 2.e) Lista reducida ordenada (Z-A) ---");
+        console.log("Punto 2.e) Lista reducida ordenada (Z-A)");
         console.log(reducido);
 
     } catch (error) {
@@ -113,7 +113,7 @@ async function procesarArchivoLocal() {
 //EJECUCIÓN PRINCIPAL 
 
 async function main() {
-    console.log("Iniciando TP con ES Modules...");
+    console.log("Iniciando TP...");
     const lista = await obtenerPersonajes();
     await agregarPersonaje();
     await buscarPorId(2);
