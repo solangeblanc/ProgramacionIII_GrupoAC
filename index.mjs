@@ -1,5 +1,24 @@
 import fs from 'fs/promises';
 
+/** Modelos definidos con JSDoc para facilitar typados en JavaScript 
+ * Se utilizan para tipar los datos que se reciben y se envían a la API. 
+ * Basado en lo descrito en los schemas de Swagger de la API V2. (https://thronesapi.com/swagger/v2/swagger.json)
+ * 
+ * @typedef {Object} CharacterModel
+ * @property {number} id - A unique number that identifies this character.
+ * @property {string} [firstName] - The character's first name.
+ * @property {string} [lastName] - The character's last name.
+ * @property {string} [fullName] - The First + Last name of the character.
+ * @property {string} [title] - The character's formal title.
+ * @property {string} [family] - The character's family name.
+ * @property {string} [image] - The character's picture filename.
+ * @property {string} [imageUrl] - The chaelo Continente de Game of Thrones
+ * 
+
+ * @typedef {Object} ContinentModel
+ * @property {number} id - A unique number that identifies this continent.
+ * @property {string} [name] - TheHTTPServices name.
+ */
 
 //API Fecth – File System
 //1 - Utilizando el API https://thronesapi.com/ realizar las siguientes tareas:
@@ -7,6 +26,10 @@ import fs from 'fs/promises';
 
 const url = "https://thronesapi.com/api/v2/Characters";
 
+/**
+ * Obtiene todos los personajes de la API.
+ * @returns {Promise<CharacterModel[]>} Una promesa que resuelve a un array de personajes.
+ */
 async function obtenerPersonajes() {
     try {
         const respuesta = await fetch(url);
@@ -21,6 +44,10 @@ async function obtenerPersonajes() {
 
 //b) Agregar un nuevo personaje (POST).
 
+/**
+ * Agrega un nuevo personaje a la API.
+ * @returns {Promise<void>}
+ */
 async function agregarPersonaje() {
     try {
         const nuevo = { firstName: "Lionel", lastName: "Messi" };
@@ -38,6 +65,11 @@ async function agregarPersonaje() {
 //c) Buscar la información de un determinado personaje, utilizando un “id” como parámetro
 //(GET)
 
+/**
+ * Busca un personaje por su ID.
+ * @param {number} id - El ID del personaje a buscar.
+ * @returns {Promise<CharacterModel>} Una promesa que resuelve al personaje encontrado.
+ */
 async function buscarPorId(id) {
     try {
         const respuesta = await fetch(`${url}/${id}`);
@@ -51,6 +83,11 @@ async function buscarPorId(id) {
 
 //d) Persistir los datos de la primer consulta en un archivo local JSON.
 
+/**
+ * Guarda los datos en un archivo local JSON.
+ * @param {CharacterModel[]} datos - Los datos a guardar.
+ * @returns {Promise<void>}
+ */
 async function guardarEnArchivo(datos) {
     try {
         await fs.writeFile('personajes.json', JSON.stringify(datos, null, 2));
@@ -63,11 +100,19 @@ async function guardarEnArchivo(datos) {
 // Métodos comunes y avanzados – File System
 //2 - Utilizando el archivo creado en el punto anterior:
 
+/**
+ * Lee el archivo local JSON.
+ * @returns {Promise<CharacterModel[]>} Una promesa que resuelve a un array de personajes.
+ */
 async function leerArchivoLocal() {
     const contenido = await fs.readFile('personajes.json', 'utf-8');
     return JSON.parse(contenido);
 }
 
+/**
+ * Procesa el archivo local JSON.
+ * @returns {Promise<void>}
+ */
 async function procesarArchivoLocal() {
     try {
         let personajes = await leerArchivoLocal();
