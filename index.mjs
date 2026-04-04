@@ -12,7 +12,7 @@ async function obtenerPersonajes() {
         const respuesta = await fetch(url);
         const datos = await respuesta.json();
         console.log(" Punto 1.a) Listado Completo");
-        console.log(datos);
+        console.table(datos, ["firstName", "lastName", "fullName", "title", "family"]);
         return datos;
     } catch (error) {
         console.error("Error en punto a:", error.message);
@@ -72,38 +72,38 @@ async function procesarArchivoLocal() {
     try {
         let personajes = await leerArchivoLocal();
 
-// a) Agregar un personaje al final del archivo.
+        // a) Agregar un personaje al final del archivo.
 
         personajes.push({ id: 99, fullName: "Personaje Final", family: "Grupo AC" });
-        
-//b) Agregar dos personajes al inicio del archivo.
+
+        //b) Agregar dos personajes al inicio del archivo.
 
         personajes.unshift(
-            { id: 100, fullName: "Primero Inicio" }, 
+            { id: 100, fullName: "Primero Inicio" },
             { id: 101, fullName: "Segundo Inicio" }
         );
 
-//c) Eliminar el primer personaje, mostrar en consola el elemento eliminado.
+        //c) Eliminar el primer personaje, mostrar en consola el elemento eliminado.
 
         const eliminado = personajes.shift();
         console.log("Elemento eliminado: ", eliminado);
 
-// Guardamos los cambios en el archivo original
+        // Guardamos los cambios en el archivo original
 
         await fs.writeFile('personajes.json', JSON.stringify(personajes, null, 2));
 
-//d) Crear un nuevo archivo que solo contenga los: id y nombres de los personajes
+        //d) Crear un nuevo archivo que solo contenga los: id y nombres de los personajes
 
         const reducido = personajes.map(p => ({ id: p.id, nombre: p.fullName }));
         await fs.writeFile('personajes_reducidos.json', JSON.stringify(reducido, null, 2));
         console.log(" Archivo 'personajes_reducidos.json' creado");
 
-//e) Para los datos anteriores ordenar por nombre y de forma decreciente, luego mostrar por
-//consola (investigar método sort()).
+        //e) Para los datos anteriores ordenar por nombre y de forma decreciente, luego mostrar por
+        //consola (investigar método sort()).
 
         reducido.sort((a, b) => b.nombre.localeCompare(a.nombre));
         console.log("Lista reducida ordenada (Z-A)");
-        console.log(reducido);
+        console.table(reducido);
 
     } catch (error) {
         console.error("Error:", error.message);
