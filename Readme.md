@@ -10,7 +10,8 @@
 * Natasha Fernandez  
 * Ivonne Micaela Fernandez  
 * Esteban Medina  
-
+* Yanina Galvan
+* Gustavo Adrián Pereyra
 ## Enlace a GITHUB
 
 https://github.com/solangeblanc/ProgramacionIII_GrupoAC.git
