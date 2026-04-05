@@ -172,7 +172,7 @@ async function procesarArchivoLocal() {
 //EJECUCIÓN PRINCIPAL 
 
 async function main() {
-    console.log("Iniciando TP...");
+    console.log("Iniciando TP grupo AC");
     const lista = await obtenerPersonajes();
     await agregarPersonaje();
     await buscarPorId(2);
