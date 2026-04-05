@@ -110,32 +110,46 @@ async function leerArchivoLocal() {
 }
 
 /**
+ * Modifica el archivo local JSON utilizando un callback para alterar los datos.
+ * @param {(personajes: CharacterModel[]) => CharacterModel[]} callback - Función que recibe el array de personajes y lo modifica.
+ * @returns {Promise<void>}
+ */
+async function modificarArchivoLocal(callback) {
+    const datos = await leerArchivoLocal();
+    const personajes = callback(datos);
+    await fs.writeFile('personajes.json', JSON.stringify(personajes, null, 2));
+}
+
+/**
  * Procesa el archivo local JSON.
  * @returns {Promise<void>}
  */
 async function procesarArchivoLocal() {
     try {
-        let personajes = await leerArchivoLocal();
-
         // a) Agregar un personaje al final del archivo.
-
-        personajes.push({ id: 99, fullName: "Personaje Final", family: "Grupo AC" });
+        await modificarArchivoLocal((personajes) => {
+            personajes.push({ id: 99, fullName: "Personaje Final", family: "Grupo AC" });
+            return personajes;
+        });
 
         //b) Agregar dos personajes al inicio del archivo.
-
-        personajes.unshift(
-            { id: 100, fullName: "Primero Inicio" },
-            { id: 101, fullName: "Segundo Inicio" }
-        );
+        await modificarArchivoLocal((personajes) => {
+            personajes.unshift(
+                { id: 100, fullName: "Primero Inicio" },
+                { id: 101, fullName: "Segundo Inicio" }
+            );
+            return personajes;
+        });
 
         //c) Eliminar el primer personaje, mostrar en consola el elemento eliminado.
+        await modificarArchivoLocal((personajes) => {
+            const eliminado = personajes.shift();
+            console.log("Elemento eliminado: ", eliminado);
+            return personajes;
+        });
 
-        const eliminado = personajes.shift();
-        console.log("Elemento eliminado: ", eliminado);
-
-        // Guardamos los cambios en el archivo original
-
-        await fs.writeFile('personajes.json', JSON.stringify(personajes, null, 2));
+        // Leemos nuevamente los personajes guardados para los pasos siguientes
+        let personajes = await leerArchivoLocal();
 
         //d) Crear un nuevo archivo que solo contenga los: id y nombres de los personajes
 
