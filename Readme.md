@@ -18,7 +18,7 @@ https://github.com/solangeblanc/ProgramacionIII_GrupoAC.git
 
 ### Consignas
 
-Los alumnos deberán crear un archivo de JavaScript que realice consultas al API  https://thronesapi.com/. Trabajar   con   métodos   comunes   y   avanzados   de   los   arrays,   y   utilizar   el   módulos   File   System   de   NodeJS.Cuando se solicite, persistir la información en un archivo local en formato JSON y realizar acciones sobredicho archivo.
+Los alumnos deberán crear un archivo de JavaScript que realice consultas al API. https://thronesapi.com/. Trabajar con métodos   comunes y avanzados de los arrays, y utilizar el  módulos File System de NodeJS.Cuando se solicite, persistir la información en un archivo local en formato JSON y realizar acciones sobredicho archivo.
 
 #### 1. API Fetch – File System
 
